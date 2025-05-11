@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AI Future Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="ratio-container">
+        <!-- Form 1: Ratio Chart -->
+        <form method="post">
+            <input type="hidden" name="form_type" value="ratio">
+
+            <label for="ratio_type">Choose Ratio:</label>
+            <select name="ratio_type" id="ratio_type" required>
+                {% for ratio in ratios %}
+                <option value="{{ ratio }}" {% if ratio==selected_ratio %}selected{% endif %}>{{ ratio }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Generate Ratio Chart</button>
+        </form>
+        <!-- Loading Spinner -->
+        <div id="loading-spinner-ratio" class="spinner" style="display: none;"></div>
+
+        <div id="chart-container" {% if not plot %}style="display:none;" {% endif %}>
+            <h2>Ratio Chart</h2>
+            <img id="ratio-chart" src="data:image/png;base64,{{ plot }}" alt="Ratio Chart"
+                onload="hideSpinner('ratio')">
+        </div>
+    </div>
+    <hr>
+    <div class="prediction-container">
+        <i class="fas fa-robot ai-icon" title="Prediction supported by AI"></i>
+        <!-- Form 2: Prediction Chart -->
+        <form method="post">
+            <input type="hidden" name="form_type" value="prediction">
+
+            <label for="prediction_type">Choose Prediction:</label>
+            <select name="prediction_type" id="prediction_type" required>
+                {% for p in predictions %}
+                <option value="{{ p }}" {% if p==selected_prediction %}selected{% endif %}>{{ p }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Generate Prediction Chart</button>
+        </form>
+        <!-- Loading Spinner -->
+        <div id="loading-spinner-predict" class="spinner" style="display: none;"></div>
+
+        <div id="prediction-container" {% if not prediction %}style="display:none;" {% endif %}>
+            <h2>Prediction Chart</h2>
+            <img id="prediction" src="data:image/png;base64,{{ prediction }}" alt="Prediction Chart"
+                onload="hideSpinner('predict')">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const forms = document.querySelectorAll('form');
+
+            forms.forEach(form => {
+                form.addEventListener('submit', () => {
+                    const formType = form.querySelector('input[name="form_type"]').value;
+
+                    if (formType === 'ratio') {
+                        document.getElementById('chart-container').style.display = 'none';
+                        document.getElementById('loading-spinner-ratio').style.display = 'block';
+                    } else if (formType === 'prediction') {
+                        document.getElementById('prediction-container').style.display = 'none';
+                        document.getElementById('loading-spinner-predict').style.display = 'block';
+                    }
+                });
+            });
+        });
+
+        function hideSpinner(type) {
+            if (type === 'ratio') {
+                document.getElementById('loading-spinner-ratio').style.display = 'none';
+                document.getElementById('chart-container').style.display = 'block';
+            } else if (type === 'prediction') {
+                document.getElementById('loading-spinner-predict').style.display = 'none';
+                document.getElementById('prediction-container').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>

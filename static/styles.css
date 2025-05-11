@@ -1,0 +1,129 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ddd;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+}
+
+form {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.ratio-container,
+.prediction-container {
+    text-align: center;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    min-width: 535px;
+}
+
+button {
+    font-family: 'Roboto', sans-serif;
+    background-color: #4F46E5;
+    /* Indigo-600 */
+    color: white;
+    padding: 6px 8px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #4338CA;
+    /* Indigo-700 */
+    transform: translateY(-1px);
+}
+
+button:active {
+    background-color: #3730A3;
+    /* Indigo-800 */
+    transform: translateY(1px);
+}
+
+label {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+select {
+    padding: 8px 10px;
+    font-size: 1rem;
+    border: 2px solid #4F46E5;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    appearance: none;
+    transition: all 0.3s ease;
+    width: 250px;
+    box-sizing: border-box;
+    text-align: center;
+    outline: none;
+    position: relative;
+}
+
+select:focus {
+    border-color: #4338CA;
+    box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.2);
+}
+
+select option {
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #333;
+}
+
+select option:hover {
+    background-color: #f0f0f0;
+    color: #4F46E5;
+}
+
+/* Custom Arrow */
+select {
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%234F46E5' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 5.5l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+}
+
+/* AI Prediction Icon */
+.ai-icon {
+    font-size: 1.5rem;
+    color: #4F46E5;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 0.8s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
