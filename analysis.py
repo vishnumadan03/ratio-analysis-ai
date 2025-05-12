@@ -50,7 +50,7 @@ def generate_quick_ratio():
 def generate_proprietary_ratio():
     df = pd.read_excel(r'./data/project.xlsx', sheet_name='Sheet1', skiprows=19, nrows=3)
 
-    plt.figure(figsize=(3, 3))
+    plt.figure(figsize=(4, 3))
     plt.pie(df['Ratio'], labels=df['Year'], autopct='%1.1f%%', startangle=90, colors=["purple","red","blue"])
     plt.title('Proprietary Ratio Distribution by Year')
 
@@ -64,7 +64,7 @@ def generate_proprietary_ratio():
 def generate_inventory_ratio():
     df = pd.read_excel(r'./data/project.xlsx', sheet_name='Sheet1', skiprows=33, nrows=3)
 
-    plt.figure(figsize=(3, 3))
+    plt.figure(figsize=(5, 3))
     plt.pie(df['Ratio'], labels=df['Year'], autopct='%1.1f%%', startangle=90, colors=["green","yellow","red"])
     plt.title('Inventory turnover Ratio Distribution by Year')
 
@@ -78,7 +78,7 @@ def generate_inventory_ratio():
 def generate_fixed_asset_turnover_ratio():
     df = pd.read_excel(r'./data/project.xlsx', sheet_name='Sheet1', skiprows=40, nrows=3)
 
-    plt.figure(figsize=(3, 3))
+    plt.figure(figsize=(5, 3))
     plt.pie(df['Ratio'], labels=df['Year'], autopct='%1.1f%%', startangle=90, colors=["blue","orange","brown"])
     plt.title('Fixed asset turnover Ratio Distribution by Year')
 
@@ -92,7 +92,7 @@ def generate_fixed_asset_turnover_ratio():
 def generate_gross_profit_ratio():
     df = pd.read_excel(r'./data/project.xlsx', sheet_name='Sheet1', skiprows=47, nrows=3)
 
-    plt.figure(figsize=(3, 3))
+    plt.figure(figsize=(4, 3))
     plt.pie(df['Ratio'], labels=df['Year'], autopct='%1.1f%%', startangle=90, colors=["yellow","brown","indigo"])
     plt.title('Gross profit Ratio Distribution by Year')
     
