@@ -6,23 +6,23 @@ from typing import Optional
 import uvicorn
 import os
 
-from analysis import ( 
-    generate_current_ratio, 
-    generate_quick_ratio, 
-    generate_proprietary_ratio, 
-    generate_inventory_ratio, 
-    generate_net_profit_ratio, 
-    generate_gross_profit_ratio, 
-    generate_fixed_asset_turnover_ratio, 
+from analysis import (
+    generate_current_ratio,
+    generate_quick_ratio,
+    generate_proprietary_ratio,
+    generate_inventory_ratio,
+    generate_net_profit_ratio,
+    generate_gross_profit_ratio,
+    generate_fixed_asset_turnover_ratio,
     future_prediction_current_ratio,
-    future_prediction_net_profit_ratio
+    future_prediction_net_profit_ratio,
 )
 
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 router = APIRouter()
-templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
 ratio_function_map = {
     "Current Ratio": generate_current_ratio,
@@ -42,25 +42,31 @@ prediction_function_map = {
 
 available_predictions = list(prediction_function_map.keys())
 
+
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {
-        "request": request,
-        "plot": None,
-        "ratios": available_ratios,
-        "predictions": available_predictions
-    })
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "plot": None,
+            "ratios": available_ratios,
+            "predictions": available_predictions,
+        },
+    )
+
 
 @app.get("/health")
 def read_root():
-    return { "status": "healthy"}
+    return {"status": "healthy"}
+
 
 @app.post("/", response_class=HTMLResponse)
 async def handle_form(
     request: Request,
     form_type: Optional[str] = Form(None),
     ratio_type: Optional[str] = Form(None),
-    prediction_type: Optional[str] = Form(None)
+    prediction_type: Optional[str] = Form(None),
 ):
 
     context = {
@@ -70,7 +76,7 @@ async def handle_form(
         "plot": None,
         "prediction": None,
         "selected_ratio": ratio_type,
-        "selected_prediction": prediction_type
+        "selected_prediction": prediction_type,
     }
 
     try:
@@ -85,19 +91,18 @@ async def handle_form(
     except Exception as e:
         context["error"] = str(e)
     return templates.TemplateResponse("index.html", context)
-    
-is_dev = os.getenv("ENVIRONMENT","development") == "development"
+
+
+is_dev = os.getenv("ENVIRONMENT", "development") == "development"
+
 
 # Optional: run function for launching via `python main.py`
 def run():
     uvicorn.run(
-        "main:app",
-        host="0.0.0.0",
-        port=int(os.getenv("PORT", 8000)),
-        reload=is_dev
+        "main:app", host="0.0.0.0", port=int(os.getenv("PORT", 8000)), reload=is_dev
     )
+
 
 # Ensure it only runs when executed directly
 if __name__ == "__main__":
     run()
-    
