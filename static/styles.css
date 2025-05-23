@@ -8,6 +8,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   height: 100%;
+  position: relative;
 }
 
 body::before {
